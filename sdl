@@ -1,0 +1,115 @@
+// java
+
+const contenedor = document.querySelector(".flex-container");
+
+function crearLlave(nombre,modelo,precio){
+	img = "<img class='llave' src='llave.png'>";
+	nombre = `<h2>${nombre}</h2>`;
+	modelo = `<h3>${modelo}</h3>`;
+	precio = `<p>Precio: <b>$${precio}</b></p>`;
+	return [img,nombre,modelo,precio];
+}
+
+let documentFragment = document.createDocumentFragment();
+
+for (var i = 1; i <= 20; i++) {
+	modeloRandom = Math.round(Math.random()*10000);
+	precioRandom = Math.round(Math.random()*10+30);
+	llave = crearLlave(`llave ${i}`,`modelo ${modeloRandom}`,precioRandom);
+	div = document.createElement("DIV");
+	div.addEventListener("click",()=>{changeHidden(modeloRandom)});
+	div.tabIndex = i;
+	div.classList.add(`item-${i}`,'flex-item');
+	div.innerHTML = llave.join(" ");
+	documentFragment.appendChild(div);
+}
+
+contenedor.appendChild(documentFragment);
+
+
+//estilo.css
+
+
+.flex-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;	
+	color: #333;
+	font-family: sans-serif;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+.flex-item {
+	flex-grow: 1;
+	margin: 20px;
+	,max-width: 300px;
+	border: 2px solid #333;
+	padding: 0 20px;
+}
+
+.flex-item:hover {
+	border-color: #71a154;
+	box-shadow: 0px 0px 30px #132;
+}
+
+
+.flex-item:focus {
+	border-color: #71a154;
+	box-shadow: 0px 0px 30px #132;
+}
+
+h2,h3{
+	margin: 0;
+}
+
+
+h2{
+	color: #999;
+}
+
+p b {
+	color: #91e374;
+}
+
+.llave-img {
+	width: 300px;
+	flex-grow: 1;
+	flex-basis: 300px;
+	margin: 20px;
+}
+
+form {
+	text-align: center;
+	padding: 50px;
+}
+
+input[type="submit"]{
+	background: #317124;
+	color: #fff;
+	border: none;
+	padding: 13px 25px;
+	font-size: 20px;
+	letter-spacing: 1px;
+}
+
+// html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Encontrar mi llave</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<meta charset="utf-8">
+</head>
+<body>
+<div class="flex-container">
+</div>
+<form>
+		<input type="hidden" name="data" class="key-data">
+		<input type="submit" value="COMPRAR" class="send-button">
+</form>
+	<script src="codigo.js"></script>
+</body>
+</html>
